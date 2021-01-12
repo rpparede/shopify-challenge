@@ -1,9 +1,10 @@
 
+require('dotenv').config({ path: '../.env' });
 const express = require('express');
 const path = require('path');
 const app = express(),
     bodyParser = require("body-parser");
-port = 3080;
+const homePageController = require('./controllers/homePage')
 
 // place holder for the data
 const users = [];
@@ -23,11 +24,8 @@ app.post('/api/user', (req, res) => {
     res.json("user addedd");
 });
 
-app.get('/', (req, res) => {
-    res.send('App Works !!!!');
-    //res.sendFile(path.join(__dirname, '../client/public/index.html'));
-});
+app.get('/', homePageController);
 
-app.listen(port, () => {
-    console.log(`Server listening on the port::${port}`);
+app.listen(process.env.PORT, () => {
+    console.log(`Server listening on the port::${process.env.PORT}`);
 });
