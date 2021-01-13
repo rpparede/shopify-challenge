@@ -8,5 +8,7 @@ module.exports = async (req, res) => {
     posts
 
   });*/
-  res.send("Hitting home page controller");
+  //res.send("Hitting home page controller");
+  //res.setHeader('Content-Type', 'application/json');
+  res.send(JSON.stringify({ test1: "1 " }));
 }

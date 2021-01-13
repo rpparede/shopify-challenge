@@ -1,6 +1,7 @@
 
 require('dotenv').config({ path: '../.env' });
 const express = require('express');
+const cors = require('cors');
 const path = require('path');
 const app = express(),
     bodyParser = require("body-parser");
@@ -10,6 +11,7 @@ const homePageController = require('./controllers/homePage')
 const users = [];
 
 app.use(bodyParser.json());
+app.use(cors())
 //app.use(express.static(path.join(__dirname, '../client/public')));
 
 app.get('/api/users', (req, res) => {
