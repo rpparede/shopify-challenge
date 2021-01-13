@@ -11,7 +11,7 @@ const app = express(),
 const homePageController = require('./controllers/homePage')
 const storePostController = require('./controllers/storePost')
 const storePost = require("./middleware/storePost")
-const db = require('./queries')
+//const db = require('./queries')
 const multer = require('multer');
 // place holder for the data
 const users = [];
@@ -19,8 +19,39 @@ app.use(fileUpload())
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(cors())
+var corsOptions = {
+    origin: "http://localhost:3000"
+};
+app.use(cors(corsOptions))
 //app.use(express.static(path.join(__dirname, '../client/public')));
+
+const db = require("./models");
+const Role = db.role;
+
+db.sequelize.sync({ force: true }).then(() => {
+    console.log('Drop and Resync Db');
+    initial();
+});
+
+function initial() {
+    Role.create({
+        id: 1,
+        name: "user"
+    });
+
+    Role.create({
+        id: 2,
+        name: "moderator"
+    });
+
+    Role.create({
+        id: 3,
+        name: "admin"
+    });
+}
+
+require('./routes/auth.routes')(app);
+require('./routes/user.routes')(app);
 
 cloudinary.config({
     api_key: process.env.CLOUDINARY_API_KEY,

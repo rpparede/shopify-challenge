@@ -1,10 +1,10 @@
 //const Post = require("../database/models/Post")
-const db = require('../queries')
+//const db = require('../queries')
 module.exports = async (req, res) => {
 
   //const posts = await Post.find({}).populate('author');
   console.log("posts")
-  await db.getUsers(req, res);
+  //await db.getUsers(req, res);
   //console.log(res)
   /*res.render("index", {
     posts
