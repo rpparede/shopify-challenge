@@ -1,6 +1,7 @@
 
 require('dotenv').config({ path: '../.env' });
 const express = require('express');
+const cloudinary = require("cloudinary")
 const cors = require('cors');
 const path = require('path');
 const fs = require('fs')
@@ -21,7 +22,11 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
 //app.use(express.static(path.join(__dirname, '../client/public')));
 
-
+cloudinary.config({
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+    cloud_name: process.env.CLOUDINARY_NAME
+})
 
 app.get('/api/users', (req, res) => {
     console.log('api/users called!')
