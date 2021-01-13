@@ -6,7 +6,9 @@ const path = require('path');
 const app = express(),
     bodyParser = require("body-parser");
 const homePageController = require('./controllers/homePage')
-
+const storePostController = require('./controllers/storePost')
+const storePost = require("./middleware/storePost")
+const db = require('./queries')
 // place holder for the data
 const users = [];
 
@@ -25,8 +27,14 @@ app.post('/api/user', (req, res) => {
     users.push(user);
     res.json("user addedd");
 });
-
+// Return all photos publicly available
 app.get('/', homePageController);
+
+// Get individual post
+//app.get("/post/:id", getPostController)
+
+// Post request to store a post 
+app.post("/posts/store", storePost, storePostController)
 
 app.listen(process.env.PORT, () => {
     console.log(`Server listening on the port::${process.env.PORT}`);
