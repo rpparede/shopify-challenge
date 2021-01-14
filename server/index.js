@@ -121,7 +121,7 @@ app.get('/photo', (req, res) => {
 
 
 // Post request to store a post 
-app.post("/posts/store", storePost, storePostController)
+//app.post("/posts/store", storePost, storePostController)
 
 
 app.listen(process.env.PORT, () => {

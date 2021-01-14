@@ -30,4 +30,10 @@ module.exports = function (app) {
         [authJwt.verifyToken, authJwt.isAdmin],
         controller.adminBoard
     );
+    app.post(
+        "/posts/store",
+        [authJwt.verifyToken],
+        controller.userPost
+    );
+
 };
