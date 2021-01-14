@@ -12,8 +12,9 @@ module.exports = function (app) {
 
     app.get("/api/test/all", controller.allAccess);
 
+    // Get user posts
     app.get(
-        "/api/test/user",
+        "/api/posts/user",
         [authJwt.verifyToken],
         controller.userBoard
     );

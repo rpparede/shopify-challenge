@@ -13,6 +13,7 @@ const storePostController = require('./controllers/storePost')
 const storePost = require("./middleware/storePost")
 //const db = require('./queries')
 const multer = require('multer');
+var bcrypt = require("bcryptjs");
 // place holder for the data
 const users = [];
 app.use(fileUpload())
@@ -27,7 +28,9 @@ app.use(cors(corsOptions))
 
 const db = require("./models");
 const Role = db.role;
-
+const User = db.user;
+const Post = db.post;
+// comment out { force: true } in prod to keep data
 db.sequelize.sync({ force: true }).then(() => {
     console.log('Drop and Resync Db');
     initial();
@@ -47,6 +50,38 @@ function initial() {
     Role.create({
         id: 3,
         name: "admin"
+    });
+
+    User.create({
+        id: 1,
+        username: "admin",
+        email: "test@gmail.com",
+        password: bcrypt.hashSync("adminadmin", 8)
+    });
+    User.create({
+        id: 2,
+        username: "admin2",
+        email: "test2@gmail.com",
+        password: bcrypt.hashSync("adminadmin", 8)
+    });
+
+    Post.create({
+        id: 1,
+        title: "title1",
+        url: "url1",
+        userId: 1,
+    });
+    Post.create({
+        id: 2,
+        title: "title222",
+        url: "url2222",
+        userId: 1,
+    });
+    Post.create({
+        id: 3,
+        title: "title88888",
+        url: "url8888888",
+        userId: 2,
     });
 }
 
