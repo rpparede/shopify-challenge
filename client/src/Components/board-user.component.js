@@ -7,7 +7,7 @@ export default class BoardUser extends Component {
         super(props);
 
         this.state = {
-            content: ""
+            content: []
         };
     }
 
@@ -15,18 +15,11 @@ export default class BoardUser extends Component {
         UserService.getUserBoard().then(
             response => {
                 this.setState({
-                    content: JSON.stringify(response.data)
+                    content: response.data.posts
                 });
             },
             error => {
-                this.setState({
-                    content:
-                        (error.response &&
-                            error.response.data &&
-                            error.response.data.message) ||
-                        error.message ||
-                        error.toString()
-                });
+
             }
         );
     }
@@ -35,7 +28,17 @@ export default class BoardUser extends Component {
         return (
             <div className="container">
                 <header className="jumbotron">
-                    <h3>{this.state.content}</h3>
+                    {this.state.content && this.state.content.map((post, index) => (
+                        <div key={index}>
+                            <h2 > {post.title}</h2>
+                            <div style={{ maxHeight: "500px", maxWidth: "500px", overflow: "hidden" }}>
+                                <img alt='img' src={post.url} />
+                            </div>
+
+                        </div>
+                    ))
+
+                    }
                 </header>
             </div>
         );

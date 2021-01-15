@@ -7,7 +7,7 @@ export default class Home extends Component {
         super(props);
 
         this.state = {
-            content: ""
+            content: []
         };
     }
 
@@ -15,27 +15,36 @@ export default class Home extends Component {
         UserService.getPublicContent().then(
             response => {
                 this.setState({
-                    content: JSON.stringify(response.data)
+                    content: response.data.posts
                 });
+
+
             },
             error => {
-                this.setState({
-                    content:
-                        (error.response && error.response.data) ||
-                        error.message ||
-                        error.toString()
-                });
             }
         );
     }
 
     render() {
+
         return (
-            <div className="container">
-                <header className="jumbotron">
-                    <h3>{this.state.content}</h3>
-                </header>
-            </div>
+            <>
+                <div className="container">
+                    <header className="jumbotron">
+                        {this.state.content && this.state.content.map((post, index) => (
+                            <div>
+                                <h2 key={index}> {post.title}</h2>
+                                <div style={{ maxHeight: "500px", maxWidth: "500px", overflow: "hidden" }}>
+                                    <img alt='img' src={post.url} />
+                                </div>
+
+                            </div>
+                        ))
+
+                        }
+                    </header>
+                </div>
+            </>
         );
     }
 }

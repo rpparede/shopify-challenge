@@ -57,6 +57,7 @@ export default class CreatePost extends Component {
         const formData = new FormData();
 
         formData.append('picture', this.state.image);
+        formData.append('title', this.state.title);
         const config = {
             headers: {
                 'content-type': 'multipart/form-data'

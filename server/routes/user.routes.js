@@ -35,5 +35,31 @@ module.exports = function (app) {
         [authJwt.verifyToken],
         controller.userPost
     );
-
+    /*
+    // Resource: POST
+    app.get(
+        "/posts",
+        [authJwt.verifyToken],
+        controller.allAccess
+    );
+    app.post(
+        "/posts",
+        [authJwt.verifyToken],
+        controller.userPost
+    );
+    app.get(
+        "/posts/:postId",
+        [authJwt.verifyToken],
+        //controller.userPost
+    );
+    app.patch(
+        "/posts/:postId",
+        [authJwt.verifyToken],
+        //controller.userPost
+    );
+    app.delelete(
+        "/posts/:postId",
+        [authJwt.verifyToken],
+        //controller.userPost
+    );*/
 };

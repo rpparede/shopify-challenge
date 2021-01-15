@@ -1,9 +1,10 @@
 module.exports = (sequelize, Sequelize) => {
     const Post = sequelize.define("posts", {
-        /*user_id: {
+        id: {
             type: Sequelize.INTEGER,
-            foreignKey: true
-        },*/
+            autoIncrement: true,
+            primaryKey: true
+        },
         title: {
             type: Sequelize.STRING
         },

@@ -66,19 +66,19 @@ function initial() {
     });
 
     Post.create({
-        id: 1,
+
         title: "title1",
         url: "url1",
         userId: 1,
     });
     Post.create({
-        id: 2,
+
         title: "title222",
         url: "url2222",
         userId: 1,
     });
     Post.create({
-        id: 3,
+
         title: "title88888",
         url: "url8888888",
         userId: 2,

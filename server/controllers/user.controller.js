@@ -1,18 +1,23 @@
 const db = require("../models");
-const User = db.user;
+//const User = db.user;
 const Post = db.post;
-const Role = db.role;
+//const Role = db.role;
 
 exports.allAccess = (req, res) => {
     Post.findAll({
-    }).then(posts => {
-        let userPosts = { "posts": [] }
-        for (let i = 0; i < posts.length; i++) {
-            userPosts["posts"].push(posts[i].dataValues);
+        raw: true
+    })
+        .then(posts => {
+            /*posts.JSON();
+            let userPosts = { "posts": [] }
+            for (let i = 0; i < posts.length; i++) {
+                userPosts["posts"].push(posts[i].dataValues);
+            }*/
+            console.log(typeof (posts))
+            console.log(posts)
+            res.status(200).send({ "posts": posts });
         }
-        res.status(200).send(userPosts);
-    }
-    );
+        );
     //res.status(200).send("Public Content.");
 };
 
@@ -30,29 +35,6 @@ exports.userBoard = (req, res) => {
     }
     );
 
-
-    /*User.findOne({
-        where: {
-            id: req.userId
-        }
-    })
-        .then(user => {
-            if (!user) {
-                return res.status(404).send({ message: "User Not found." });
-            }
-
-            var userPosts = { "posts": [] };
-            user.getPosts().then(posts => {
-                for (let i = 0; i < posts.length; i++) {
-                    userPosts["posts"].push(posts[i].dataValues);
-                }
-                res.status(200).send(userPosts);
-            });
-        })
-        .catch(err => {
-            res.status(500).send({ message: err.message });
-        });*/
-
 };
 
 exports.adminBoard = (req, res) => {
@@ -65,6 +47,7 @@ exports.moderatorBoard = (req, res) => {
 
 const cloudinary = require('cloudinary')
 const path = require("path");
+
 exports.userPost = (req, res) => {
 
     console.log("STORE POST control")
@@ -83,9 +66,26 @@ exports.userPost = (req, res) => {
                 console.log(error)
                 return res.redirect('/')
             }
-            console.log("**ERROR STORING POST**")
+            console.log("*****")
+            console.log(req.body)
             console.log(result.secure_url)
-            res.send(result.secure_url);
+            Post.create({
+                title: req.body.title,
+                url: result.secure_url,
+                userId: req.userId
+            })
+                .then(post => {
+
+                    res.send(JSON.stringify(post));
+                })
+                .catch(err => {
+                    console.log(err)
+                    res.status(500).send({ message: err.message });
+                });
+
+            //console.log("**ERROR STORING POST**")
+            //console.log(result.secure_url)
+
 
 
         });
