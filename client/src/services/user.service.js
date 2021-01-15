@@ -19,6 +19,10 @@ class UserService {
     getAdminBoard() {
         return axios.get(API_URL + 'admin', { headers: authHeader() });
     }
+
+    createPost(data, config) {
+        return axios.post('http://localhost:3080/posts/store', data, { headers: authHeader() }, config);
+    }
 }
 
 export default new UserService();

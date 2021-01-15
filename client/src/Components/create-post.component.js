@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-
-import AuthService from "../services/auth.service";
+import authHeader from '../services/auth-header';
+import axios from 'axios';
+import UserService from "../services/user.service";
 
 const required = value => {
     if (!value) {
@@ -15,34 +16,34 @@ const required = value => {
     }
 };
 
-export default class Login extends Component {
+export default class CreatePost extends Component {
     constructor(props) {
         super(props);
-        this.handleLogin = this.handleLogin.bind(this);
-        this.onChangeUsername = this.onChangeUsername.bind(this);
-        this.onChangePassword = this.onChangePassword.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.onChangeTitle = this.onChangeTitle.bind(this);
+        this.onChangeImage = this.onChangeImage.bind(this);
 
         this.state = {
-            username: "",
-            password: "",
+            title: "",
+            image: null,
             loading: false,
             message: ""
         };
     }
 
-    onChangeUsername(e) {
+    onChangeTitle(e) {
         this.setState({
-            username: e.target.value
+            title: e.target.value
         });
     }
 
-    onChangePassword(e) {
+    onChangeImage(e) {
         this.setState({
-            password: e.target.value
+            image: e.target.files[0]
         });
     }
 
-    handleLogin(e) {
+    handleSubmit(e) {
         e.preventDefault();
 
         this.setState({
@@ -52,74 +53,76 @@ export default class Login extends Component {
 
         this.form.validateAll();
 
-        if (this.checkBtn.context._errors.length === 0) {
-            AuthService.login(this.state.username, this.state.password).then(
-                () => {
-                    console.log(this.props)
-                    this.props.history.push("/profile");
-                    window.location.reload();
-                },
-                error => {
-                    const resMessage =
-                        (error.response &&
-                            error.response.data &&
-                            error.response.data.message) ||
-                        error.message ||
-                        error.toString();
 
-                    this.setState({
-                        loading: false,
-                        message: resMessage
-                    });
-                }
-            );
-        } else {
-            this.setState({
-                loading: false
-            });
-        }
+        const formData = new FormData();
+
+        formData.append('picture', this.state.image);
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        };
+
+        UserService.createPost(formData, config).then(
+
+            (res) => {
+                console.log(res)
+                this.setState({
+                    loading: false,
+                    message: "Success"
+                });
+                //this.props.history.push("/home");
+                //window.location.reload();
+            },
+            error => {
+                const resMessage =
+                    (error.response &&
+                        error.response.data &&
+                        error.response.data.message) ||
+                    error.message ||
+                    error.toString();
+
+                this.setState({
+                    loading: false,
+                    message: resMessage
+                });
+            }
+        );
+
     }
 
     render() {
         return (
             <div className="col-md-12">
                 <div className="card card-container">
-                    <img
-                        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-                        alt="profile-img"
-                        className="profile-img-card"
-                    />
-
                     <Form
-                        onSubmit={this.handleLogin}
+                        onSubmit={this.handleSubmit}
                         ref={c => {
                             this.form = c;
                         }}
                     >
                         <div className="form-group">
-                            <label htmlFor="username">Username</label>
+                            <label htmlFor="title">Title</label>
                             <Input
                                 type="text"
                                 className="form-control"
-                                name="username"
-                                value={this.state.username}
-                                onChange={this.onChangeUsername}
+                                name="title"
+                                value={this.state.title}
+                                onChange={this.onChangeTitle}
                                 validations={[required]}
                             />
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="password">Password</label>
+                            <label htmlFor="image">Image</label>
                             <Input
-                                type="password"
+                                type="file"
                                 className="form-control"
-                                name="password"
-                                value={this.state.password}
-                                onChange={this.onChangePassword}
+                                name="image"
+                                onChange={this.onChangeImage}
                                 validations={[required]}
                             />
                         </div>
-
                         <div className="form-group">
                             <button
                                 className="btn btn-primary btn-block"
@@ -128,10 +131,9 @@ export default class Login extends Component {
                                 {this.state.loading && (
                                     <span className="spinner-border spinner-border-sm"></span>
                                 )}
-                                <span>Login</span>
+                                <span>Post</span>
                             </button>
                         </div>
-
                         {this.state.message && (
                             <div className="form-group">
                                 <div className="alert alert-danger" role="alert">
@@ -139,12 +141,7 @@ export default class Login extends Component {
                                 </div>
                             </div>
                         )}
-                        <CheckButton
-                            style={{ display: "none" }}
-                            ref={c => {
-                                this.checkBtn = c;
-                            }}
-                        />
+
                     </Form>
                 </div>
             </div>
