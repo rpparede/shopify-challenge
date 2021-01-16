@@ -53,13 +53,11 @@ function initial() {
     });
 
     User.create({
-        id: 1,
         username: "admin",
         email: "test@gmail.com",
         password: bcrypt.hashSync("adminadmin", 8)
     });
     User.create({
-        id: 2,
         username: "admin2",
         email: "test2@gmail.com",
         password: bcrypt.hashSync("adminadmin", 8)
