@@ -5,7 +5,7 @@ import CheckButton from "react-validation/build/button";
 import authHeader from '../services/auth-header';
 import axios from 'axios';
 import UserService from "../services/user.service";
-
+import SinglePost from "./single-post";
 const required = value => {
     if (!value) {
         return (

@@ -105,3 +105,13 @@ exports.deletePost = (req, res) => {
     });
 
 };
+
+exports.editPost = (req, res) => {
+    Post.update(
+        { title: req.body.title },
+        { returning: true, where: { id: req.params.postId } }
+    ).then(([rowsUpdate, [updatedPost]]) => {
+        res.status(200).send(updatedPost);
+    });
+
+};

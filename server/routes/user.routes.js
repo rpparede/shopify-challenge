@@ -41,6 +41,11 @@ module.exports = function (app) {
         [authJwt.verifyToken],
         controller.deletePost
     );
+    app.put(
+        "/posts/:postId",
+        [authJwt.verifyToken],
+        controller.editPost
+    );
     /*  
       // Resource: POST
       app.get(
@@ -58,10 +63,6 @@ module.exports = function (app) {
           [authJwt.verifyToken],
           //controller.userPost
       );
-      app.patch(
-          "/posts/:postId",
-          [authJwt.verifyToken],
-          //controller.userPost
-      );
+
   */
 };

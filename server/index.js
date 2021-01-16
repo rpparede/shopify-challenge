@@ -65,20 +65,20 @@ function initial() {
 
     Post.create({
 
-        title: "title1",
-        url: "url1",
+        title: "Test Image 1",
+        url: "https://res.cloudinary.com/dn9rjmpwu/image/upload/v1609912267/v41hxlipquqs9jiewkp7.png",
         userId: 1,
     });
     Post.create({
 
-        title: "title222",
-        url: "url2222",
+        title: "Test Image 2",
+        url: "https://res.cloudinary.com/dn9rjmpwu/image/upload/v1609912267/v41hxlipquqs9jiewkp7.png",
         userId: 1,
     });
     Post.create({
 
-        title: "title88888",
-        url: "url8888888",
+        title: "Test Image 3",
+        url: "https://res.cloudinary.com/dn9rjmpwu/image/upload/v1609912267/v41hxlipquqs9jiewkp7.png",
         userId: 2,
     });
 }

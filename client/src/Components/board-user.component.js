@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import UserService from "../services/user.service";
+import SinglePost from "./single-post";
 
 export default class BoardUser extends Component {
     constructor(props) {
@@ -46,6 +47,17 @@ export default class BoardUser extends Component {
             <div className="container">
                 <header className="jumbotron">
                     {this.state.content && this.state.content.map((post, index) => (
+                        <SinglePost post={post} />
+                    ))
+
+                    }
+                </header>
+            </div>
+        );
+        /*return (
+            <div className="container">
+                <header className="jumbotron">
+                    {this.state.content && this.state.content.map((post, index) => (
                         <div key={index}>
                             <h2 > {post.title}</h2>
                             <div style={{ maxHeight: "500px", maxWidth: "500px", overflow: "hidden" }}>
@@ -61,6 +73,6 @@ export default class BoardUser extends Component {
                     }
                 </header>
             </div>
-        );
+        );*/
     }
 }
