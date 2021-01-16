@@ -131,7 +131,7 @@ class App extends Component {
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={props => <Register />} />
               <Route exact path="/profile" component={props => <Profile />} />
-              <Route exact path="/newPost" component={props => <NewPost />} />
+              <Route exact path="/newPost" component={NewPost} />
               <Route path="/user" component={props => <BoardUser />} />
               <Route path="/mod" component={props => <BoardModerator />} />
               <Route path="/admin" component={props => <BoardAdmin />} />

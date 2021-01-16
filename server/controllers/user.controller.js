@@ -96,8 +96,6 @@ exports.userPost = (req, res) => {
 };
 
 exports.deletePost = (req, res) => {
-    console.log("******")
-    console.log(req.params)
     Post.destroy({
         where: {
             id: req.params.postId

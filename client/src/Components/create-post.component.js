@@ -72,8 +72,8 @@ export default class CreatePost extends Component {
                     loading: false,
                     message: "Success"
                 });
-                //this.props.history.push("/home");
-                //window.location.reload();
+                this.props.history.push("/user");
+                window.location.reload();
             },
             error => {
                 const resMessage =
