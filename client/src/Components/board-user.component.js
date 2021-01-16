@@ -45,34 +45,13 @@ export default class BoardUser extends Component {
     render() {
         return (
             <div className="container">
-                <header className="jumbotron">
-                    {this.state.content && this.state.content.map((post, index) => (
-                        <SinglePost post={post} />
-                    ))
+                {this.state.content && this.state.content.map((post, index) => (
+                    <SinglePost post={post} />
+                ))
 
-                    }
-                </header>
+                }
             </div>
         );
-        /*return (
-            <div className="container">
-                <header className="jumbotron">
-                    {this.state.content && this.state.content.map((post, index) => (
-                        <div key={index}>
-                            <h2 > {post.title}</h2>
-                            <div style={{ maxHeight: "500px", maxWidth: "500px", overflow: "hidden" }}>
-                                <img alt='img' src={post.url} />
-                            </div>
-                            <button type="submit" onClick={e => this.onRemovePhoto(e, post)}>
-                                Delete
-                             </button>
 
-                        </div>
-                    ))
-
-                    }
-                </header>
-            </div>
-        );*/
     }
 }

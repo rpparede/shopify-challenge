@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-
+import { Image, Transformation } from 'cloudinary-react';
 import UserService from "../services/user.service";
-
+import Card from 'react-bootstrap/Card'
 export default class Home extends Component {
     constructor(props) {
         super(props);
@@ -30,21 +30,20 @@ export default class Home extends Component {
         return (
             <>
                 <div className="container">
-                    <header className="jumbotron">
-                        {this.state.content && this.state.content.map((post, index) => (
-                            <div>
-                                <h2 key={index}> {post.title}</h2>
-                                <div style={{ maxHeight: "500px", maxWidth: "500px", overflow: "hidden" }}>
-                                    <img alt='img' src={post.url} />
-                                </div>
+                    {this.state.content && this.state.content.map((post, index) => (
+                        <Card style={{ width: '100' }}>
+                            <Card.Body>
+                                <Card.Title>{post.title}</Card.Title>
+                            </Card.Body>
+                            <Card.Img variant="top" src={post.url} />
+                        </Card>
+                    )
+                    )
+                    }
 
-                            </div>
-                        ))
-
-                        }
-                    </header>
                 </div>
             </>
         );
+
     }
 }
