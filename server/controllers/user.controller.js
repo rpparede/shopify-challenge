@@ -94,3 +94,16 @@ exports.userPost = (req, res) => {
 
     //res.status(200).send("Moderator Content.");
 };
+
+exports.deletePost = (req, res) => {
+    console.log("******")
+    console.log(req.params)
+    Post.destroy({
+        where: {
+            id: req.params.postId
+        }
+    }).then(() => {
+        res.status(200).send({});
+    });
+
+};

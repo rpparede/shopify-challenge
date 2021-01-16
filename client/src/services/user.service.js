@@ -23,6 +23,9 @@ class UserService {
     createPost(data, config) {
         return axios.post('http://localhost:3080/posts/store', data, { headers: authHeader() }, config);
     }
+    deletePost(postId) {
+        return axios.delete('http://localhost:3080/posts/' + postId, { headers: authHeader() });
+    }
 }
 
 export default new UserService();
