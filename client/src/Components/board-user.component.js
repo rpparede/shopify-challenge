@@ -46,7 +46,7 @@ export default class BoardUser extends Component {
         return (
             <div className="container">
                 {this.state.content && this.state.content.map((post, index) => (
-                    <SinglePost post={post} />
+                    <SinglePost post={post} removePhoto={this.onRemovePhoto} />
                 ))
 
                 }

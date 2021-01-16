@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import AuthService from "../services/auth.service";
-
 export default class Profile extends Component {
     constructor(props) {
         super(props);
@@ -17,8 +16,8 @@ export default class Profile extends Component {
             <div className="container">
                 <header className="jumbotron">
                     <h3>
-                        <strong>{currentUser.username}</strong> Profile
-          </h3>
+                        Profile
+                    </h3>
                 </header>
                 <p>
                     <strong>Token:</strong>{" "}
@@ -26,8 +25,12 @@ export default class Profile extends Component {
                     {currentUser.accessToken.substr(currentUser.accessToken.length - 20)}
                 </p>
                 <p>
-                    <strong>Id:</strong>{" "}
+                    <strong>UserID:</strong>{" "}
                     {currentUser.id}
+                </p>
+                <p>
+                    <strong>Username:</strong>{" "}
+                    {currentUser.username}
                 </p>
                 <p>
                     <strong>Email:</strong>{" "}
