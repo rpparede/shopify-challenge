@@ -10,6 +10,10 @@ module.exports = (sequelize, Sequelize) => {
         },
         url: {
             type: Sequelize.STRING
+        },
+        price: {
+            type: Sequelize.INTEGER,
+            defaultValue: 0
         }
     });
 

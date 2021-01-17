@@ -22,15 +22,22 @@ export default class CreatePost extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onChangeTitle = this.onChangeTitle.bind(this);
         this.onChangeImage = this.onChangeImage.bind(this);
+        this.onChangePrice = this.onChangePrice.bind(this);
 
         this.state = {
             title: "",
             image: null,
             loading: false,
-            message: ""
+            message: "",
+            price: 0
         };
     }
 
+    onChangePrice(e) {
+        this.setState({
+            price: e.target.value
+        });
+    }
     onChangeTitle(e) {
         this.setState({
             title: e.target.value
@@ -58,6 +65,7 @@ export default class CreatePost extends Component {
 
         formData.append('picture', this.state.image);
         formData.append('title', this.state.title);
+        formData.append('price', this.state.price);
         const config = {
             headers: {
                 'content-type': 'multipart/form-data'
@@ -113,7 +121,17 @@ export default class CreatePost extends Component {
                                 validations={[required]}
                             />
                         </div>
-
+                        <div className="form-group">
+                            <label htmlFor="title">Price (CAD)</label>
+                            <Input
+                                type="number"
+                                className="form-control"
+                                name="price"
+                                value={this.state.price}
+                                onChange={this.onChangePrice}
+                                validations={[required]}
+                            />
+                        </div>
                         <div className="form-group">
                             <label htmlFor="image">Image</label>
                             <Input

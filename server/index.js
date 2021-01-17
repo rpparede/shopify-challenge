@@ -27,7 +27,7 @@ app.use(cors(corsOptions))
 //app.use(express.static(path.join(__dirname, '../client/public')));
 
 const db = require("./models");
-const Role = db.role;
+//const Role = db.role;
 const User = db.user;
 const Post = db.post;
 // comment out { force: true } in prod to keep data
@@ -37,7 +37,7 @@ db.sequelize.sync({ force: true }).then(() => {
 });
 
 function initial() {
-    Role.create({
+    /*Role.create({
         id: 1,
         name: "user"
     });
@@ -50,7 +50,7 @@ function initial() {
     Role.create({
         id: 3,
         name: "admin"
-    });
+    });*/
 
     User.create({
         username: "admin",

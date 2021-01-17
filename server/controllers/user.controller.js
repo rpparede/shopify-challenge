@@ -72,7 +72,8 @@ exports.userPost = (req, res) => {
             Post.create({
                 title: req.body.title,
                 url: result.secure_url,
-                userId: req.userId
+                userId: req.userId,
+                price: parseInt(req.body.price)
             })
                 .then(post => {
 

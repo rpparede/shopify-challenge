@@ -37,8 +37,8 @@ class App extends Component {
         currentUser: user,
         showNewPost: true,
         showMyPost: true,
-        showModeratorBoard: user.roles.includes("ROLE_MODERATOR"),
-        showAdminBoard: user.roles.includes("ROLE_ADMIN"),
+        //showModeratorBoard: user.roles.includes("ROLE_MODERATOR"),
+        //showAdminBoard: user.roles.includes("ROLE_ADMIN"),
       });
     }
   }
@@ -68,22 +68,6 @@ class App extends Component {
                   New Post
               </Link>
               </li>)}
-
-              {showModeratorBoard && (
-                <li className="nav-item">
-                  <Link to={"/mod"} className="nav-link">
-                    Moderator Board
-                </Link>
-                </li>
-              )}
-
-              {showAdminBoard && (
-                <li className="nav-item">
-                  <Link to={"/admin"} className="nav-link">
-                    Admin Board
-                </Link>
-                </li>
-              )}
 
               {currentUser && (
                 <li className="nav-item">
