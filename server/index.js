@@ -68,18 +68,21 @@ function initial() {
         title: "Test Image 1",
         url: "https://res.cloudinary.com/dn9rjmpwu/image/upload/v1609912267/v41hxlipquqs9jiewkp7.png",
         userId: 1,
+        price: 100
     });
     Post.create({
 
         title: "Test Image 2",
         url: "https://res.cloudinary.com/dn9rjmpwu/image/upload/v1609912267/v41hxlipquqs9jiewkp7.png",
         userId: 1,
+        price: 200
     });
     Post.create({
 
         title: "Test Image 3",
         url: "https://res.cloudinary.com/dn9rjmpwu/image/upload/v1609912267/v41hxlipquqs9jiewkp7.png",
         userId: 2,
+        price: 300
     });
 }
 

@@ -1,20 +1,14 @@
 const db = require("../models");
-//const User = db.user;
+const User = db.user;
 const Post = db.post;
 //const Role = db.role;
 
 exports.allAccess = (req, res) => {
     Post.findAll({
-        raw: true
+        raw: true, include: { model: User, attributes: ['username', 'email'] }
     })
         .then(posts => {
-            /*posts.JSON();
-            let userPosts = { "posts": [] }
-            for (let i = 0; i < posts.length; i++) {
-                userPosts["posts"].push(posts[i].dataValues);
-            }*/
-            console.log(typeof (posts))
-            console.log(posts)
+
             res.status(200).send({ "posts": posts });
         }
         );
@@ -109,7 +103,10 @@ exports.deletePost = (req, res) => {
 
 exports.editPost = (req, res) => {
     Post.update(
-        { title: req.body.title },
+        {
+            title: req.body.title,
+            price: req.body.price
+        },
         { returning: true, where: { id: req.params.postId } }
     ).then(([rowsUpdate, [updatedPost]]) => {
         res.status(200).send(updatedPost);
