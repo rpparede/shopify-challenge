@@ -4,12 +4,12 @@ import authHeader from './auth-header';
 const API_URL = 'http://localhost:3080/api/test/';
 
 class UserService {
-    getPublicContent() {
-        return axios.get(API_URL + 'all');
+    getPublicContent(params) {
+        return axios.get(API_URL + 'all', { params });
     }
 
-    getUserBoard() {
-        return axios.get('http://localhost:3080/api/posts/user', { headers: authHeader() });
+    getUserBoard(params) {
+        return axios.get('http://localhost:3080/api/posts/user', { headers: authHeader() }, { params });
     }
 
     getModeratorBoard() {

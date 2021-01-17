@@ -4,14 +4,34 @@ const Post = db.post;
 //const Role = db.role;
 
 exports.allAccess = (req, res) => {
-    Post.findAll({
+    const { page, size, title } = req.query;
+
+    const getPagination = (page, size) => {
+        const limit = size ? +size : 3;
+        const offset = page ? page * limit : 0;
+
+        return { limit, offset };
+    };
+    const getPagingData = (data, page, limit) => {
+        const { count: totalItems, rows: posts } = data;
+        const currentPage = page ? +page : 0;
+        const totalPages = Math.ceil(totalItems / limit);
+
+        return { totalItems, posts, totalPages, currentPage };
+    };
+    const { limit, offset } = getPagination(page, size);
+    Post.findAndCountAll({
+        limit,
+        offset,
         raw: true, include: { model: User, attributes: ['username', 'email'] }
     })
         .then(posts => {
-
-            res.status(200).send({ "posts": posts });
+            const response = getPagingData(posts, page, limit);
+            console.log("*******")
+            console.log(response)
+            res.status(200).send(response);//({ "posts": posts });
         }
-        );
+        ).catch(err => console.log(err));
     //res.status(200).send("Public Content.");
 };
 
