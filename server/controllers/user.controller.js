@@ -2,23 +2,22 @@ const db = require("../models");
 const User = db.user;
 const Post = db.post;
 //const Role = db.role;
+const getPagination = (page, size) => {
+    const limit = size ? +size : 3;
+    const offset = page ? page * limit : 0;
 
+    return { limit, offset };
+};
+const getPagingData = (data, page, limit) => {
+    const { count: totalItems, rows: posts } = data;
+    const currentPage = page ? +page : 0;
+    const totalPages = Math.ceil(totalItems / limit);
+
+    return { totalItems, posts, totalPages, currentPage };
+};
 exports.allAccess = (req, res) => {
-    const { page, size, title } = req.query;
+    const { page, size } = req.query;
 
-    const getPagination = (page, size) => {
-        const limit = size ? +size : 3;
-        const offset = page ? page * limit : 0;
-
-        return { limit, offset };
-    };
-    const getPagingData = (data, page, limit) => {
-        const { count: totalItems, rows: posts } = data;
-        const currentPage = page ? +page : 0;
-        const totalPages = Math.ceil(totalItems / limit);
-
-        return { totalItems, posts, totalPages, currentPage };
-    };
     const { limit, offset } = getPagination(page, size);
     Post.findAndCountAll({
         limit,
@@ -36,16 +35,28 @@ exports.allAccess = (req, res) => {
 };
 
 exports.userBoard = (req, res) => {
-    Post.findAll({
+    const { page, size } = req.query;
+    console.log("REQ QUERY")
+    console.log(req.query)
+    const { limit, offset } = getPagination(page, size);
+    Post.findAndCountAll({
+        limit,
+        offset,
         where: {
             userId: req.userId
         }
     }).then(posts => {
-        let userPosts = { "posts": [] }
+        /*let userPosts = { "posts": [] }
         for (let i = 0; i < posts.length; i++) {
             userPosts["posts"].push(posts[i].dataValues);
         }
-        res.status(200).send(userPosts);
+        res.status(200).send(userPosts);*/
+        console.log("woo")
+        console.log(posts)
+        const response = getPagingData(posts, page, limit);
+        console.log("*******")
+        console.log(response)
+        res.status(200).send(response);//({ "posts": posts });
     }
     );
 

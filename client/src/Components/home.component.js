@@ -39,12 +39,13 @@ export default class Home extends Component {
     }
 
     retrievePosts() {
-
         const params = this.getRequestParams(this.state.page, this.state.pageSize);
         UserService.getPublicContent(params).then(
             response => {
                 console.log(response)
                 const { posts, totalPages } = response.data;
+                console.log("poststttttt")
+                console.log(posts)
                 this.setState({
                     content: posts,
                     count: totalPages,
@@ -55,20 +56,6 @@ export default class Home extends Component {
 
             }
         );
-        /*console.log(post)
-        TutorialDataService.getAll(params)
-            .then((response) => {
-                const { tutorials, totalPages } = response.data;
-
-                this.setState({
-                    tutorials: tutorials,
-                    count: totalPages,
-                });
-                console.log(response.data);
-            })
-            .catch((e) => {
-                console.log(e);
-            });*/
     }
     handlePageChange(event, value) {
         this.setState(

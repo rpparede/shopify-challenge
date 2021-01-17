@@ -77,6 +77,36 @@ function initial() {
         userId: 1,
         price: 200
     });
+
+    Post.create({
+
+        title: "Test Image 3",
+        url: "https://res.cloudinary.com/dn9rjmpwu/image/upload/v1609912267/v41hxlipquqs9jiewkp7.png",
+        userId: 1,
+        price: 100
+    });
+    Post.create({
+
+        title: "Test Image 4",
+        url: "https://res.cloudinary.com/dn9rjmpwu/image/upload/v1609912267/v41hxlipquqs9jiewkp7.png",
+        userId: 1,
+        price: 200
+    });
+
+    Post.create({
+
+        title: "Test Image 5",
+        url: "https://res.cloudinary.com/dn9rjmpwu/image/upload/v1609912267/v41hxlipquqs9jiewkp7.png",
+        userId: 1,
+        price: 100
+    });
+    Post.create({
+
+        title: "Test Image 6",
+        url: "https://res.cloudinary.com/dn9rjmpwu/image/upload/v1609912267/v41hxlipquqs9jiewkp7.png",
+        userId: 1,
+        price: 200
+    });
     Post.create({
 
         title: "Test Image 3",

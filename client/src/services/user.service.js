@@ -9,7 +9,7 @@ class UserService {
     }
 
     getUserBoard(params) {
-        return axios.get('http://localhost:3080/api/posts/user', { headers: authHeader() }, { params });
+        return axios.get('http://localhost:3080/api/posts/user', { headers: authHeader(), params: params });
     }
 
     getModeratorBoard() {
