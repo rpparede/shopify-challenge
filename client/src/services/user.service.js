@@ -1,33 +1,26 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 
-const API_URL = 'http://localhost:3080/api/test/';
+const API_URL = 'http://localhost:3080/api/';
 
 class UserService {
     getPublicContent(params) {
-        return axios.get(API_URL + 'all', { params });
+        return axios.get(API_URL + 'posts', { params });
     }
 
     getUserBoard(params) {
-        return axios.get('http://localhost:3080/api/posts/user', { headers: authHeader(), params: params });
+        return axios.get(API_URL + 'posts/user', { headers: authHeader(), params: params });
     }
 
-    getModeratorBoard() {
-        return axios.get(API_URL + 'mod', { headers: authHeader() });
-    }
-
-    getAdminBoard() {
-        return axios.get(API_URL + 'admin', { headers: authHeader() });
-    }
 
     createPost(data, config) {
-        return axios.post('http://localhost:3080/posts/store', data, { headers: authHeader() }, config);
+        return axios.post(API_URL + 'posts/store', data, { headers: authHeader() }, config);
     }
     editPost(data, postId) {
-        return axios.put('http://localhost:3080/posts/' + postId, data, { headers: authHeader() });
+        return axios.put(API_URL + 'posts/' + postId, data, { headers: authHeader() });
     }
     deletePost(postId) {
-        return axios.delete('http://localhost:3080/posts/' + postId, { headers: authHeader() });
+        return axios.delete(API_URL + 'posts/' + postId, { headers: authHeader() });
     }
 }
 
