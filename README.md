@@ -1,4 +1,4 @@
-# Shopify Summer 2020 Internship Challenge
+# Shopify Summer 2021 Internship Challenge
 
 LocalStock is a web application I have developed as part of my application to the Summer 2020 Internship Program.
 
