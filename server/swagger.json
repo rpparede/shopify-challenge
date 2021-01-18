@@ -1,0 +1,187 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Local Stock CRUD API",
+        "description": "Shopify Challenge"
+    },
+    "host": "localhost:3080",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Posts",
+            "description": "API for users in the system"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/posts": {
+            "get": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Get all posts in system",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Posts"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Post": {
+            "required": [
+                "title",
+                "url",
+                "price",
+                "userId"
+            ],
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "integer"
+                },
+                "userId": {
+                    "type": "integer"
+                }
+            }
+        },
+        "Posts": {
+            "type": "array",
+            "$ref": "#/definitions/Post"
+        },
+        "User": {
+            "required": [
+                "username",
+                "email",
+                "password"
+            ],
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "integer"
+                }
+            }
+        },
+        "updatePost": {
+            "required": [
+                "name",
+                "companies"
+            ],
+            "properties": {
+                "title": "title",
+                "price": "price",
+                "postId": "postId"
+            }
+        }
+    },
+    "paths": {
+        "/api/posts": {
+            "get": {
+                "tags": [
+                    "Posts"
+                ],
+                "summary": "Get all posts in system",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Posts"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/posts/store": {
+            "post": {
+                "tags": [
+                    "Posts"
+                ],
+                "description": "Create new post in system",
+                "consumes": "multipart/form-data",
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "upfile",
+                        "type": "file",
+                        "title": "title",
+                        "price": "price",
+                        "schema": {
+                            "$ref": "#/definitions/Post"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New post is created",
+                        "schema": {
+                            "$ref": "#/definitions/Post"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/posts/{id}": {
+            "parameters": [
+                {
+                    "postId": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of Post that we want to find",
+                    "type": "integer"
+                }
+            ],
+            "put": {
+                "summary": "Update post with given ID",
+                "tags": [
+                    "Post"
+                ],
+                "parameters": [
+                    {
+                        "title": "title",
+                        "price": "price",
+                        "postId": "postId",
+                        "in": "body",
+                        "description": "Post with new values of properties",
+                        "schema": {
+                            "$ref": "#/definitions/updatePost"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Post is updated",
+                        "schema": {
+                            "$ref": "#/definitions/Post"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

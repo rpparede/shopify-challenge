@@ -1,6 +1,8 @@
 
 require('dotenv').config({ path: '../.env' });
 const express = require('express');
+var swaggerDocument = require("./swagger.json"),
+  swaggerUi = require("swagger-ui-express");
 const cloudinary = require("cloudinary")
 const cors = require('cors');
 const path = require('path');
@@ -104,6 +106,7 @@ cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME
 })
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.listen(process.env.PORT, () => {
   console.log(`Server listening on the port::${process.env.PORT}`);
 });
