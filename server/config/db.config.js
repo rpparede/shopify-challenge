@@ -2,7 +2,7 @@ module.exports = {
     HOST: "localhost",
     USER: "postgres",
     PASSWORD: "admin",
-    DB: "shopifychallenge",
+    DB: "postgres",
     dialect: "postgres",
     pool: {
         max: 5,
